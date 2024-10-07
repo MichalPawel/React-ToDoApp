@@ -9,24 +9,16 @@ class App extends Component {
   }
   deleteTask = (id) => {
     console.log(`delete id:${id}`);
-    // SPOSOB 1
-    // const tasks = [...this.state.tasks]; //tworze kopie tasks
-    // const index = tasks.findIndex(task => task.id === id); //znajduje index elementu
-    // tasks.splice(index, 1) //wycinam element || metoda zmienia tasks, zwraca usuniete elementy (ale tego nie potrzebuje)
-    // this.setState({
-    //   tasks
-    // })
-
-    // SPOSOB 2
-    let tasks = [...this.state.tasks] //kopia tablicy
-    tasks = tasks.filter(task => task.id !== id) //do nowej tablicy przejda tylko te ktore maja inne id
+    
+    let tasks = [...this.state.tasks] 
+    tasks = tasks.filter(task => task.id !== id) 
     this.setState({
       tasks
     })
   }
   changeTaskStatus = (id) => {
     console.log(`changestatus id:${id}`)
-    let tasks = Array.from(this.state.tasks) //kopia tablicy
+    let tasks = Array.from(this.state.tasks) 
     tasks.forEach(task => {
       if (task.id === id) {
         task.active = !task.active
@@ -38,14 +30,14 @@ class App extends Component {
     })
   }
   addTask = (text, date, checked) => {
-    //sprawdzenie ostatniego id w tasks
+  
     let lastID = 0;
     this.state.tasks.forEach(task => {
       if (task.id > lastID) {
         lastID = task.id
       }
     })
-    //tworzenie nowego taska
+    
     let task = {
       id: lastID + 1,
       text,
@@ -54,9 +46,9 @@ class App extends Component {
       active: true,
       finishDate: null,
     }
-    //sprawdenie czy nowy task poprawny
-    if (task.text.length < 4) { return alert('wpisz przynajmniej 4 znaki') }
-    //dodanie nowego taska
+    
+    if (task.text.length < 4) { return alert('type at least 4 characters') }
+    
     let currentTasks = [...this.state.tasks];
     currentTasks.push(task);
     this.setState({
